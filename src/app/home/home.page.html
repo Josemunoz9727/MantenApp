@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>MantenApp</ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar
+      placeholder="Buscar por vehículo, tipo o nota"
+      [debounce]="250"
+      (ionInput)="buscar($event)"
+    ></ion-searchbar>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  @if (vm$ | async; as vm) {
+    @if (vm.mantenciones.length > 0) {
+      <div class="resumen">
+        <span>{{ vm.mantenciones.length }} registro(s)</span>
+        <strong>{{ vm.totalGastado | currency: 'CLP' : 'symbol-narrow' : '1.0-0' }}</strong>
+      </div>
+
+      @for (m of vm.mantenciones; track m.id) {
+        <app-mantencion-item
+          [mantencion]="m"
+          (editar)="editar($event)"
+          (eliminar)="confirmarEliminar($event)"
+        ></app-mantencion-item>
+      }
+    } @else {
+      <div class="vacio">
+        <ion-icon name="car-sport-outline"></ion-icon>
+        @if (vm.hayRegistros) {
+          <p>No hay resultados para tu búsqueda.</p>
+        } @else {
+          <p>Aún no registras mantenciones.<br />Toca el botón + para agregar la primera.</p>
+        }
+      </div>
+    }
+  }
+
+  <ion-fab slot="fixed" vertical="bottom" horizontal="end">
+    <ion-fab-button (click)="nueva()" aria-label="Nueva mantención">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

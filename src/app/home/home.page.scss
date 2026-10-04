@@ -1,0 +1,22 @@
+.resumen {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 4px 4px 8px;
+  color: var(--ion-color-medium);
+
+  strong {
+    color: var(--ion-color-dark);
+    font-size: 1.1rem;
+  }
+}
+
+.vacio {
+  text-align: center;
+  margin-top: 25vh;
+  color: var(--ion-color-medium);
+
+  ion-icon {
+    font-size: 64px;
+  }
+}

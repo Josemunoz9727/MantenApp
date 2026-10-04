@@ -1,0 +1,25 @@
+.dato {
+  margin: 0 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.costo {
+  margin: 8px 0 0;
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--ion-color-primary);
+}
+
+.notas {
+  margin: 8px 0 0;
+  font-size: 0.9rem;
+  color: var(--ion-color-medium);
+}
+
+.acciones {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 8px;
+}

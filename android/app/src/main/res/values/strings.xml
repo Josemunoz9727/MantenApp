@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">MantenApp</string>
+    <string name="title_activity_main">MantenApp</string>
+    <string name="package_name">cl.mantenapp.app</string>
+    <string name="custom_url_scheme">cl.mantenapp.app</string>
+</resources>

@@ -1,0 +1,107 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home" text="Volver"></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ esEdicion ? 'Editar mantención' : 'Nueva mantención' }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <form [formGroup]="form" (ngSubmit)="guardar()" novalidate>
+    <ion-item>
+      <ion-input
+        label="Vehículo"
+        labelPlacement="floating"
+        formControlName="vehiculo"
+        placeholder="Ej: Toyota Yaris"
+      ></ion-input>
+    </ion-item>
+    @if (mostrarError('vehiculo', 'required')) {
+      <ion-note color="danger">El vehículo es obligatorio.</ion-note>
+    }
+    @if (mostrarError('vehiculo', 'minlength')) {
+      <ion-note color="danger">Debe tener al menos 3 caracteres.</ion-note>
+    }
+
+    <ion-item>
+      <ion-select
+        label="Tipo de mantención"
+        labelPlacement="floating"
+        formControlName="tipo"
+        interface="popover"
+        placeholder="Selecciona una opción"
+      >
+        @for (t of tipos; track t) {
+          <ion-select-option [value]="t">{{ t }}</ion-select-option>
+        }
+      </ion-select>
+    </ion-item>
+    @if (mostrarError('tipo', 'required')) {
+      <ion-note color="danger">Selecciona un tipo de mantención.</ion-note>
+    }
+
+    <ion-item>
+      <ion-input
+        label="Fecha"
+        labelPlacement="floating"
+        type="date"
+        formControlName="fecha"
+        [max]="hoy"
+      ></ion-input>
+    </ion-item>
+    @if (mostrarError('fecha', 'required')) {
+      <ion-note color="danger">La fecha es obligatoria.</ion-note>
+    }
+    @if (mostrarError('fecha', 'fechaFutura')) {
+      <ion-note color="danger">La fecha no puede ser futura.</ion-note>
+    }
+
+    <ion-item>
+      <ion-input
+        label="Kilometraje (km)"
+        labelPlacement="floating"
+        type="number"
+        inputmode="numeric"
+        formControlName="kilometraje"
+      ></ion-input>
+    </ion-item>
+    @if (mostrarError('kilometraje', 'required')) {
+      <ion-note color="danger">El kilometraje es obligatorio.</ion-note>
+    }
+    @if (mostrarError('kilometraje', 'min')) {
+      <ion-note color="danger">No puede ser negativo.</ion-note>
+    }
+
+    <ion-item>
+      <ion-input
+        label="Costo (CLP)"
+        labelPlacement="floating"
+        type="number"
+        inputmode="numeric"
+        formControlName="costo"
+      ></ion-input>
+    </ion-item>
+    @if (mostrarError('costo', 'required')) {
+      <ion-note color="danger">El costo es obligatorio.</ion-note>
+    }
+    @if (mostrarError('costo', 'min')) {
+      <ion-note color="danger">No puede ser negativo.</ion-note>
+    }
+
+    <ion-item>
+      <ion-textarea
+        label="Notas (opcional)"
+        labelPlacement="floating"
+        formControlName="notas"
+        [counter]="true"
+        maxlength="200"
+        [autoGrow]="true"
+      ></ion-textarea>
+    </ion-item>
+
+    <ion-button type="submit" expand="block" class="guardar">
+      {{ esEdicion ? 'Guardar cambios' : 'Guardar mantención' }}
+    </ion-button>
+  </form>
+</ion-content>

@@ -1,0 +1,29 @@
+<ion-card>
+  <ion-card-header>
+    <ion-card-subtitle>{{ mantencion().vehiculo }}</ion-card-subtitle>
+    <ion-card-title>{{ mantencion().tipo }}</ion-card-title>
+  </ion-card-header>
+
+  <ion-card-content>
+    <p class="dato">{{ mantencion().fecha | date: 'dd/MM/yyyy' }}</p>
+    <p class="dato">
+      <ion-icon name="speedometer-outline"></ion-icon>
+      {{ mantencion().kilometraje | number: '1.0-0' }} km
+    </p>
+    <p class="costo">{{ mantencion().costo | currency: 'CLP' : 'symbol-narrow' : '1.0-0' }}</p>
+    @if (mantencion().notas) {
+      <p class="notas">{{ mantencion().notas }}</p>
+    }
+
+    <div class="acciones">
+      <ion-button fill="clear" size="small" (click)="editar.emit(mantencion())">
+        <ion-icon slot="start" name="create-outline"></ion-icon>
+        Editar
+      </ion-button>
+      <ion-button fill="clear" size="small" color="danger" (click)="eliminar.emit(mantencion())">
+        <ion-icon slot="start" name="trash-outline"></ion-icon>
+        Eliminar
+      </ion-button>
+    </div>
+  </ion-card-content>
+</ion-card>
